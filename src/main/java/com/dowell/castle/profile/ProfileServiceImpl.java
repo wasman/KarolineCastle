@@ -1,18 +1,16 @@
-package com.dowell.castle.auth;
+package com.dowell.castle.profile;
 
-import com.dowell.castle.Character;
 import com.dowell.castle.GameWordService;
 import com.dowell.castle.UserProfile;
-import com.dowell.castle.WordMap;
 import com.dowell.castle.repository.ProfileRepository;
 
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class ProfileServiceImpl implements ProfileService {
 
     private final SecurityHelper securityHelper;
     private final ProfileRepository repository;
     private final GameWordService gameWordService;
 
-    public AuthenticationServiceImpl(SecurityHelper securityHelper, ProfileRepository repository, GameWordService gameWordService) {
+    public ProfileServiceImpl(SecurityHelper securityHelper, ProfileRepository repository, GameWordService gameWordService) {
         this.securityHelper = securityHelper;
         this.repository = repository;
         this.gameWordService = gameWordService;
@@ -29,18 +27,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public UserProfile createUserProfile(String userName, String password) {
-        String securePassword = securityHelper.getSecurePassword(password);
-        WordMap startGame = gameWordService.getStartGame();
-        Character character = new Character.Builder()
-                .currentWordMap(startGame)
+    public UserProfile createUserProfile(UserProfile userProfile) {
+        String securePassword = securityHelper.getSecurePassword(userProfile.getPassword());
+
+        UserProfile newUserProfile = new UserProfile.Builder(userProfile)
+                .password(securePassword)
                 .build();
 
-        UserProfile userProfile = new UserProfile.Builder()
-                .userName(userName)
-                .character(character)
-                .build();
-        repository.createUserProfile(userProfile,securePassword);
-        return userProfile;
+        repository.createUserProfile(newUserProfile);
+        return newUserProfile;
     }
 }

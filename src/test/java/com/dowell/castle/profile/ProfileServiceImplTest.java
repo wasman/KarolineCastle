@@ -1,11 +1,8 @@
-package com.dowell.castle.auth;
+package com.dowell.castle.profile;
 
-import com.dowell.castle.Character;
 import com.dowell.castle.GameWordService;
 import com.dowell.castle.GameWordServiceImpl;
 import com.dowell.castle.UserProfile;
-import com.dowell.castle.WordMap;
-import com.dowell.castle.WordMapImpl;
 import com.dowell.castle.repository.ProfileRepository;
 import com.dowell.castle.repository.ProfileRepositoryImpl;
 import org.junit.Test;
@@ -13,9 +10,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class AuthenticationServiceImplTest {
+public class ProfileServiceImplTest {
 
     @Test
     public void testGetUserProfile() throws Exception {
@@ -33,7 +31,7 @@ public class AuthenticationServiceImplTest {
         when(repository.getUserProfile(userName, securePassword)).thenReturn(expectedValue);
 
         // initialize class to test
-        AuthenticationService testClass = new AuthenticationServiceImpl(helper, repository, null);
+        ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
 
         // invoke method on class to test
         UserProfile returnValue = testClass.getUserProfile(userName, password);
@@ -60,7 +58,7 @@ public class AuthenticationServiceImplTest {
         when(repository.getUserProfile(userName, securePassword)).thenReturn(null);
 
         // initialize class to test
-        AuthenticationService testClass = new AuthenticationServiceImpl(helper, repository, null);
+        ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
 
         // invoke method on class to test
         try {
@@ -83,11 +81,14 @@ public class AuthenticationServiceImplTest {
         String password = "thePassword";
         String securePassword = "$thePassword$";
 
-        WordMap currentWordMap = new WordMapImpl.Builder().build();
-        Character character = new Character.Builder().currentWordMap(currentWordMap).build();
+        UserProfile inputValue = new UserProfile.Builder()
+                .userName(userName)
+                .password(password)
+                .build();
+
         UserProfile expectedValue = new UserProfile.Builder()
                 .userName(userName)
-                .character(character)
+                .password(securePassword)
                 .build();
 
         // initialize mocks
@@ -96,17 +97,17 @@ public class AuthenticationServiceImplTest {
         GameWordService gameWordService = mock(GameWordServiceImpl.class);
 
         when(helper.getSecurePassword(password)).thenReturn(securePassword);
-        when(gameWordService.getStartGame()).thenReturn(currentWordMap);
 
         // initialize class to test
-        AuthenticationService testClass = new AuthenticationServiceImpl(helper, repository, gameWordService);
+        ProfileService testClass = new ProfileServiceImpl(helper, repository, gameWordService);
 
         // invoke method on class to test
-        UserProfile returnValue = testClass.createUserProfile(userName, password);
+        UserProfile returnValue = testClass.createUserProfile(inputValue);
 
         // assert return value
         assertEquals(expectedValue, returnValue);
 
         // verify mock expectations
+        verify(repository).createUserProfile(expectedValue);
     }
 }

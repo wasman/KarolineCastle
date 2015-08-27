@@ -15,7 +15,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     @Override
-    public void createUserProfile(UserProfile newUserProfile, String securePassword) {
+    public void createUserProfile(UserProfile newUserProfile) {
 
     }
 }

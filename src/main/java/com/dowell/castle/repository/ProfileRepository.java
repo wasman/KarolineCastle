@@ -8,5 +8,5 @@ public interface ProfileRepository {
 
     UserProfile getUserProfile(String userName, String securePassword);
 
-    void createUserProfile(UserProfile newUserProfile, String securePassword);
+    void createUserProfile(UserProfile newUserProfile);
 }

@@ -1,4 +1,4 @@
-package com.dowell.castle.auth;
+package com.dowell.castle.profile;
 
 public class SecurityHelperImpl implements SecurityHelper {
 
