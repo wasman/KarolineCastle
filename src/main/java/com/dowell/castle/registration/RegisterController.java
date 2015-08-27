@@ -2,9 +2,8 @@ package com.dowell.castle.registration;
 
 public interface RegisterController {
 
+    void wireActions();
+
     void showUserRegistrationForm();
 
-    void wireRegisterAction();
-
-    void doRegister();
 }

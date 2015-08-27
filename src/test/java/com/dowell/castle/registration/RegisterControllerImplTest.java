@@ -1,6 +1,5 @@
 package com.dowell.castle.registration;
 
-import com.dowell.castle.repository.ProfileRepository;
 import org.junit.Test;
 
 import static org.mockito.Matchers.isA;
@@ -15,10 +14,9 @@ public class RegisterControllerImplTest {
 
         // initialize mocks
         RegisterView view = mock(RegisterViewImpl.class);
-        ProfileRepository repository = mock(ProfileRepository.class);
 
         // initialize class to test
-        RegisterController testClass = new RegisterControllerImpl(view, null, null);
+        RegisterController testClass = new RegisterControllerImpl(view, null, null, null);
 
         // invoke method on class to test
         testClass.showUserRegistrationForm();
@@ -37,7 +35,7 @@ public class RegisterControllerImplTest {
         RegisterView view = mock(RegisterViewImpl.class);
 
         // initialize class to test
-        RegisterController testClass = new RegisterControllerImpl(view, null, null);
+        RegisterControllerImpl testClass = new RegisterControllerImpl(view, null, null, null);
 
         // invoke method on class to test
         testClass.wireRegisterAction();
@@ -53,10 +51,9 @@ public class RegisterControllerImplTest {
 
         // initialize mocks
         RegisterView view = mock(RegisterViewImpl.class);
-        ProfileRepository repository = mock(ProfileRepository.class);
 
         // initialize class to test
-        RegisterController testClass = new RegisterControllerImpl(view, null, null);
+        RegisterController testClass = new RegisterControllerImpl(view, null, null, null);
 
         // invoke method on class to test
         testClass.doRegister();
