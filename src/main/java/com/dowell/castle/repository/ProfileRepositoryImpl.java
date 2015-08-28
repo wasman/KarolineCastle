@@ -37,9 +37,12 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     @Override
-    public UserProfile get(String userName, String securePassword) {
+    public UserProfile get(String userName) {
         Path filePath = Paths.get("./data/" + userName + ".ser");
         try {
+            if (!Files.exists(filePath)) {
+                return null;
+            }
             FileInputStream fileIn = new FileInputStream(filePath.toString());
             ObjectInputStream in = new ObjectInputStream(fileIn);
             UserProfile profile = (UserProfile) in.readObject();

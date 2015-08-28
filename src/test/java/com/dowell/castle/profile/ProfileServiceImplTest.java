@@ -21,14 +21,17 @@ public class ProfileServiceImplTest {
         String userName = "Jack";
         String password = "thePassword";
         String securePassword = "$thePassword$";
-        UserProfile expectedValue = new UserProfile.Builder().build();
+        UserProfile expectedValue = new UserProfile.Builder()
+                .userName(userName)
+                .password(securePassword)
+                .build();
 
         // initialize mocks
         SecurityHelper helper = mock(SecurityHelperImpl.class);
         ProfileRepository repository = mock(ProfileRepositoryImpl.class);
 
         when(helper.getSecurePassword(password)).thenReturn(securePassword);
-        when(repository.get(userName, securePassword)).thenReturn(expectedValue);
+        when(repository.get(userName)).thenReturn(expectedValue);
 
         // initialize class to test
         ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
@@ -38,6 +41,72 @@ public class ProfileServiceImplTest {
 
         // assert return value
         assertEquals(expectedValue, returnValue);
+
+        // verify mock expectations
+    }
+
+    @Test
+    public void testGetUserProfileIfNotExist() throws Exception {
+        // initialize variable inputs
+        String userName = "Jack";
+        String password = "thePassword";
+        String securePassword = "$thePassword$";
+
+
+        // initialize mocks
+        SecurityHelper helper = mock(SecurityHelperImpl.class);
+        ProfileRepository repository = mock(ProfileRepositoryImpl.class);
+
+        when(helper.getSecurePassword(password)).thenReturn(securePassword);
+        when(repository.get(userName)).thenReturn(null);
+
+        // initialize class to test
+        ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
+
+        // invoke method on class to test
+        try {
+            testClass.getUserProfile(userName, password);
+            fail("should fail");
+        }
+        catch (AuthenticationException ex) {
+            // assert return value
+            assertEquals("No such user", ex.getMessage());
+        }
+
+        // verify mock expectations
+    }
+
+    @Test
+    public void testGetUserProfileIfWrongPassword() throws Exception {
+        // initialize variable inputs
+        String userName = "Jack";
+        String password = "thePassword";
+        String securePassword = "$thePassword$";
+        String wrongSecurePassword = "Wrong$thePassword$";
+        UserProfile expectedValue = new UserProfile.Builder()
+                .userName(userName)
+                .password(securePassword)
+                .build();
+
+        // initialize mocks
+        SecurityHelper helper = mock(SecurityHelperImpl.class);
+        ProfileRepository repository = mock(ProfileRepositoryImpl.class);
+
+        when(helper.getSecurePassword(password)).thenReturn(wrongSecurePassword);
+        when(repository.get(userName)).thenReturn(expectedValue);
+
+        // initialize class to test
+        ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
+
+        // invoke method on class to test
+        try {
+            testClass.getUserProfile(userName, password);
+            fail("should fail");
+        }
+        catch (AuthenticationException ex) {
+            // assert return value
+            assertEquals("No such user", ex.getMessage());
+        }
 
         // verify mock expectations
     }
@@ -55,7 +124,7 @@ public class ProfileServiceImplTest {
         ProfileRepository repository = mock(ProfileRepositoryImpl.class);
 
         when(helper.getSecurePassword(password)).thenReturn(securePassword);
-        when(repository.get(userName, securePassword)).thenReturn(null);
+        when(repository.get(userName)).thenReturn(null);
 
         // initialize class to test
         ProfileService testClass = new ProfileServiceImpl(helper, repository, null);

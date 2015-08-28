@@ -1,6 +1,6 @@
 package com.dowell.castle.login;
 
-import com.dowell.castle.registration.DoRegisterAction;
+import com.dowell.castle.registration.RegisterAction;
 import com.dowell.castle.registration.RegistrationView;
 import org.junit.Test;
 
@@ -28,8 +28,8 @@ public class CastlePresenterImplTest {
         // assert return value
 
         // verify mock expectations
-        verify(castleView).wireDoLoginAction(isA(DoLoginAction.class));
-        verify(castleView).wireDoRegisterAction(isA(DoRegisterAction.class));
+        verify(castleView).wireDoLoginAction(isA(LoginAction.class));
+        verify(castleView).wireDoRegisterAction(isA(RegisterAction.class));
         verify(castleView).promptUserAction();
     }
 }

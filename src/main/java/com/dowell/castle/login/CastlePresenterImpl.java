@@ -27,7 +27,7 @@ public class CastlePresenterImpl implements CastlePresenter {
 
     @Override
     public void init() {
-        castleView.wireDoLoginAction(new DoLoginAction(loginView));
+        castleView.wireDoLoginAction(new LoginAction(loginView, profileService, userSession));
         castleView.wireDoRegisterAction(new RegisterAction(
                 registrationView, profileService, gameWordService, userSession
         ));

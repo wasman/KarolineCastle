@@ -19,8 +19,8 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public UserProfile getUserProfile(String userName, String password) throws AuthenticationException {
         String securePassword = securityHelper.getSecurePassword(password);
-        UserProfile userProfile = repository.get(userName, securePassword);
-        if (userProfile == null) {
+        UserProfile userProfile = repository.get(userName);
+        if (userProfile == null || !securePassword.equals(userProfile.getPassword())) {
             throw new AuthenticationException("No such user");
         }
         return userProfile;
