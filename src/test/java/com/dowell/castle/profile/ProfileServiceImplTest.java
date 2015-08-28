@@ -28,7 +28,7 @@ public class ProfileServiceImplTest {
         ProfileRepository repository = mock(ProfileRepositoryImpl.class);
 
         when(helper.getSecurePassword(password)).thenReturn(securePassword);
-        when(repository.getUserProfile(userName, securePassword)).thenReturn(expectedValue);
+        when(repository.get(userName, securePassword)).thenReturn(expectedValue);
 
         // initialize class to test
         ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
@@ -55,7 +55,7 @@ public class ProfileServiceImplTest {
         ProfileRepository repository = mock(ProfileRepositoryImpl.class);
 
         when(helper.getSecurePassword(password)).thenReturn(securePassword);
-        when(repository.getUserProfile(userName, securePassword)).thenReturn(null);
+        when(repository.get(userName, securePassword)).thenReturn(null);
 
         // initialize class to test
         ProfileService testClass = new ProfileServiceImpl(helper, repository, null);
@@ -108,6 +108,6 @@ public class ProfileServiceImplTest {
         assertEquals(expectedValue, returnValue);
 
         // verify mock expectations
-        verify(repository).createUserProfile(expectedValue);
+        verify(repository).create(expectedValue);
     }
 }

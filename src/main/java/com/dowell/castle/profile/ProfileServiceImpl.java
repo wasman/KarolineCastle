@@ -19,7 +19,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public UserProfile getUserProfile(String userName, String password) throws AuthenticationException {
         String securePassword = securityHelper.getSecurePassword(password);
-        UserProfile userProfile = repository.getUserProfile(userName, securePassword);
+        UserProfile userProfile = repository.get(userName, securePassword);
         if (userProfile == null) {
             throw new AuthenticationException("No such user");
         }
@@ -34,7 +34,7 @@ public class ProfileServiceImpl implements ProfileService {
                 .password(securePassword)
                 .build();
 
-        repository.createUserProfile(newUserProfile);
+        repository.create(newUserProfile);
         return newUserProfile;
     }
 }

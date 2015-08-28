@@ -11,12 +11,12 @@ import com.dowell.castle.profile.ProfileService;
 
 public class RegisterAction implements Action {
 
-    private final RegisterView view;
+    private final RegistrationView view;
     private final ProfileService profileService;
     private final GameWordService gameWordService;
     private final UserSession userSession;
 
-    public RegisterAction(RegisterView view, ProfileService profileService, GameWordService gameWordService, UserSession userSession) {
+    public RegisterAction(RegistrationView view, ProfileService profileService, GameWordService gameWordService, UserSession userSession) {
         this.view = view;
         this.profileService = profileService;
         this.gameWordService = gameWordService;

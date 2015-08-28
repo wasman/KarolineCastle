@@ -1,6 +1,10 @@
 package com.dowell.castle;
 
-public class Character {
+import java.io.Serializable;
+
+public class Character implements Serializable {
+
+    private static final long serialVersionUID = 714018303586908077L;
 
     private final WordMap currentWordMap;
     private final String name;
@@ -72,7 +76,6 @@ public class Character {
 
         public Builder currentWordMap(WordMap currentWordMap) {
             this.currentWordMap = currentWordMap;
-            this.name = name;
             return this;
         }
 

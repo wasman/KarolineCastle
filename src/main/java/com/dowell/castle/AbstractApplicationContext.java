@@ -1,38 +1,41 @@
 package com.dowell.castle;
 
+import com.dowell.castle.login.CastlePresenterImpl;
+import com.dowell.castle.login.CastleView;
+import com.dowell.castle.login.CastleViewImpl;
+import com.dowell.castle.login.LoginView;
+import com.dowell.castle.login.LoginViewImpl;
 import com.dowell.castle.profile.ProfileService;
 import com.dowell.castle.profile.SecurityHelper;
-import com.dowell.castle.registration.RegisterController;
-import com.dowell.castle.registration.RegisterView;
+import com.dowell.castle.registration.RegisterPresenter;
+import com.dowell.castle.registration.RegistrationView;
 import com.dowell.castle.repository.ProfileRepository;
 
 public abstract class AbstractApplicationContext implements ApplicationContext {
 
     @Override
     public void init() {
-        createRegistrationComponent();
-        createLoginComponent();
-    }
 
-    public void createLoginComponent() {
-
-    }
-
-    public void createRegistrationComponent() {
-        RegisterView view = creatRegisterView();
+        RegistrationView registrationView = creatRegistrationView();
         UserSession userSession = createUserSession();
         GameWordService gameWordService = createGameWordService();
-        ProfileRepository repository = createProfileRepository();
+        ProfileRepository profileRepository = createProfileRepository();
         SecurityHelper securityHelper = createSecurityHelper();
 
-        ProfileService profileService = createProfileService(gameWordService, repository, securityHelper);
-        RegisterController controller = createRegisterController(view, userSession, gameWordService, profileService);
+        ProfileService profileService = createProfileService(gameWordService, profileRepository, securityHelper);
+        RegisterPresenter registrationPresenter = createRegisterController(registrationView, userSession, gameWordService, profileService);
 
-//        controller.showUserRegistrationForm();
+        
+        LoginView loginView = new LoginViewImpl();
+        CastleView castleView = new CastleViewImpl();
+        CastlePresenterImpl castlePresenter = new CastlePresenterImpl(castleView, loginView, registrationView, profileService, gameWordService, userSession);
+
+        castlePresenter.init();
 
     }
 
-    protected abstract RegisterController createRegisterController(RegisterView view, UserSession userSession, GameWordService gameWordService, ProfileService profileService);
+
+    protected abstract RegisterPresenter createRegisterController(RegistrationView view, UserSession userSession, GameWordService gameWordService, ProfileService profileService);
 
     protected abstract ProfileService createProfileService(GameWordService gameWordService, ProfileRepository repository, SecurityHelper securityHelper);
 
@@ -44,5 +47,5 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
 
     protected abstract UserSession createUserSession();
 
-    protected abstract RegisterView creatRegisterView();
+    protected abstract RegistrationView creatRegistrationView();
 }

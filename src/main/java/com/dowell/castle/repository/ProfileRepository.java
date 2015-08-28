@@ -6,7 +6,7 @@ public interface ProfileRepository {
 
     void save(UserProfile inputValue);
 
-    UserProfile getUserProfile(String userName, String securePassword);
+    UserProfile get(String userName, String securePassword);
 
-    void createUserProfile(UserProfile newUserProfile);
+    void create(UserProfile newUserProfile);
 }

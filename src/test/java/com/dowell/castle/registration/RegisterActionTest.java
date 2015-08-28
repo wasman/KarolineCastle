@@ -46,7 +46,7 @@ public class RegisterActionTest {
                 .build();
 
         // initialize mocks
-        RegisterView view = mock(RegisterViewImpl.class);
+        RegistrationView view = mock(RegistrationViewImpl.class);
         when(view.getUserName()).thenReturn(username);
         when(view.getPassword()).thenReturn(password);
         when(view.getCharacterName()).thenReturn(characterName);

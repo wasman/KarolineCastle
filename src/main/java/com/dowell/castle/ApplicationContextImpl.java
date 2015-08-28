@@ -4,18 +4,18 @@ import com.dowell.castle.profile.ProfileService;
 import com.dowell.castle.profile.ProfileServiceImpl;
 import com.dowell.castle.profile.SecurityHelper;
 import com.dowell.castle.profile.SecurityHelperImpl;
-import com.dowell.castle.registration.RegisterController;
-import com.dowell.castle.registration.RegisterControllerImpl;
-import com.dowell.castle.registration.RegisterView;
-import com.dowell.castle.registration.RegisterViewImpl;
+import com.dowell.castle.registration.RegisterPresenter;
+import com.dowell.castle.registration.RegisterPresenterImpl;
+import com.dowell.castle.registration.RegistrationView;
+import com.dowell.castle.registration.RegistrationViewImpl;
 import com.dowell.castle.repository.ProfileRepository;
 import com.dowell.castle.repository.ProfileRepositoryImpl;
 
 public class ApplicationContextImpl extends AbstractApplicationContext {
 
     @Override
-    protected RegisterController createRegisterController(RegisterView view, UserSession userSession, GameWordService gameWordService, ProfileService profileService) {
-        return new RegisterControllerImpl(view, profileService, gameWordService, userSession);
+    protected RegisterPresenter createRegisterController(RegistrationView view, UserSession userSession, GameWordService gameWordService, ProfileService profileService) {
+        return new RegisterPresenterImpl(view, profileService, gameWordService, userSession);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ApplicationContextImpl extends AbstractApplicationContext {
     }
 
     @Override
-    protected RegisterView creatRegisterView() {
-        return new RegisterViewImpl();
+    protected RegistrationView creatRegistrationView() {
+        return new RegistrationViewImpl();
     }
 }
