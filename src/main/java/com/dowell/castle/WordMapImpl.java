@@ -6,6 +6,7 @@ import java.util.Map;
 public class WordMapImpl implements WordMap {
 
     private final String name;
+    //5*5
     private final Map<Position, ActionCell> wordMap;
 
     private WordMapImpl(Builder builder) {
@@ -14,10 +15,12 @@ public class WordMapImpl implements WordMap {
 
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public Map<Position, ActionCell> getWordMap() {
         return wordMap;
     }
