@@ -1,17 +1,18 @@
 package com.dowell.castle;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserProfile implements Serializable {
 
     private static final long serialVersionUID = 4925562223965564561L;
     private final String userName;
     private final String password;
-    private final Character character;
+    private final List<Character> characters;
 
     private UserProfile(Builder builder) {
         this.userName = builder.userName;
-        this.character = builder.character;
+        this.characters = builder.characters;
         this.password = builder.password;
 
     }
@@ -24,8 +25,8 @@ public class UserProfile implements Serializable {
         return password;
     }
 
-    public Character getCharacter() {
-        return character;
+    public List<Character> getCharacters() {
+        return characters;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class UserProfile implements Serializable {
         if (password != null ? !password.equals(that.password) : that.password != null) {
             return false;
         }
-        return !(character != null ? !character.equals(that.character) : that.character != null);
+        return !(characters != null ? !characters.equals(that.characters) : that.characters != null);
 
     }
 
@@ -53,7 +54,7 @@ public class UserProfile implements Serializable {
     public int hashCode() {
         int result = userName != null ? userName.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (character != null ? character.hashCode() : 0);
+        result = 31 * result + (characters != null ? characters.hashCode() : 0);
         return result;
     }
 
@@ -62,7 +63,7 @@ public class UserProfile implements Serializable {
         final StringBuilder sb = new StringBuilder("UserProfile{");
         sb.append("userName='").append(userName).append('\'');
         sb.append(", password='").append(password).append('\'');
-        sb.append(", character=").append(character);
+        sb.append(", characters=").append(characters);
         sb.append('}');
         return sb.toString();
     }
@@ -72,14 +73,14 @@ public class UserProfile implements Serializable {
         private String userName;
         private String password;
 
-        private Character character;
+        private List<Character> characters;
 
         public Builder() {
         }
 
         public Builder(UserProfile original) {
             this.userName = original.userName;
-            this.character = original.character;
+            this.characters = original.characters;
             this.password = original.password;
 
         }
@@ -98,8 +99,8 @@ public class UserProfile implements Serializable {
             return new UserProfile(this);
         }
 
-        public Builder character(Character character) {
-            this.character = character;
+        public Builder characters(List<Character> characters) {
+            this.characters = characters;
             return this;
         }
     }

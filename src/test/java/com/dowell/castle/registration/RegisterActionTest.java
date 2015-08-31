@@ -11,6 +11,7 @@ import com.dowell.castle.WordMapImpl;
 import com.dowell.castle.profile.ProfileService;
 import org.junit.Test;
 
+import static java.util.Arrays.asList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,13 +37,13 @@ public class RegisterActionTest {
         UserProfile profile = new UserProfile.Builder()
                 .userName(username)
                 .password(password)
-                .character(character)
+                .characters(asList(character))
                 .build();
 
         UserProfile newProfile = new UserProfile.Builder()
                 .userName(username)
                 .password(securePassword)
-                .character(character)
+                .characters(asList(character))
                 .build();
 
         // initialize mocks

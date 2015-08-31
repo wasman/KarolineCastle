@@ -21,7 +21,7 @@ public class CastlePresenterImplTest {
         RegistrationView registrationView = mock(RegistrationView.class);
 
         // initialize class to test
-        CastlePresenter testClass = new CastlePresenterImpl(castleView, loginView, registrationView, null, null, null);
+        CastlePresenter testClass = new CastlePresenterImpl(castleView, loginView, registrationView, null, null, null, null);
 
         // invoke method on class to test
         testClass.init();

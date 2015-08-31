@@ -9,6 +9,8 @@ import com.dowell.castle.UserSession;
 import com.dowell.castle.WordMap;
 import com.dowell.castle.profile.ProfileService;
 
+import static java.util.Arrays.asList;
+
 public class RegisterAction implements Action {
 
     private final RegistrationView view;
@@ -42,7 +44,7 @@ public class RegisterAction implements Action {
         UserProfile profile = new UserProfile.Builder()
                 .userName(userName)
                 .password(password)
-                .character(character)
+                .characters(asList(character))
                 .build();
 
         UserProfile newUserProfile = profileService.createUserProfile(profile);
