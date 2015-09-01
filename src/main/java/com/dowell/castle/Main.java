@@ -21,13 +21,13 @@ public class Main {
                 .name("SomeName")
                 .build();
 
-        dispalyWord(world);
+        displayWord(world);
 
 //        Console console = System.console();
 //        console.
     }
 
-    private static void dispalyWord(WordMap world) {
+    private static void displayWord(WordMap world) {
         Map<Position, ActionCell> wordMap = world.getWordMap();
 
         int width = 144;// 36 * 4

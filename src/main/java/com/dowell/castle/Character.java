@@ -74,6 +74,16 @@ public class Character implements Serializable {
         private String name;
         private CharacterType characterType;
 
+        public Builder() {
+        }
+
+        public Builder(Character original) {
+            this.currentWordMap = new WordMapImpl.Builder(original.currentWordMap).build();
+            this.name = original.name;
+            this.characterType = original.characterType;
+
+        }
+
         public Builder currentWordMap(WordMap currentWordMap) {
             this.currentWordMap = currentWordMap;
             return this;
@@ -88,6 +98,7 @@ public class Character implements Serializable {
             this.characterType = characterType;
             return this;
         }
+
         public Character build() {
             return new Character(this);
         }

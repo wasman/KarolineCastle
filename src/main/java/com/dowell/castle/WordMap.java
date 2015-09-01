@@ -8,4 +8,6 @@ public interface WordMap extends Serializable {
     String getName();
 
     Map<Position, ActionCell> getWordMap();
+
+    Position getCharacterLocation();
 }

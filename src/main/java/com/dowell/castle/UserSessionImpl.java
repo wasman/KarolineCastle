@@ -4,6 +4,7 @@ public class UserSessionImpl implements UserSession {
 
     private UserProfile profile;
 
+    @Override
     public UserProfile getProfile() {
         return profile;
     }

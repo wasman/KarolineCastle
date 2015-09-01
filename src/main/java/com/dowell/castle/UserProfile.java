@@ -1,7 +1,9 @@
 package com.dowell.castle;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserProfile implements Serializable {
 
@@ -80,7 +82,9 @@ public class UserProfile implements Serializable {
 
         public Builder(UserProfile original) {
             this.userName = original.userName;
-            this.characters = original.characters;
+            this.characters = new ArrayList<>();
+            this.characters.addAll(original.characters.stream()
+                    .collect(Collectors.toList()));
             this.password = original.password;
 
         }
