@@ -5,7 +5,7 @@ import com.dowell.castle.UserProfile;
 
 public interface GameView {
 
-    void startGame(UserProfile updatedUserProfile);
+    void displayGame(UserProfile updatedUserProfile);
 
     String requestUserMoveAction();
 

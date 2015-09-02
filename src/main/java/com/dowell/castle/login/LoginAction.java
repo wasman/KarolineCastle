@@ -44,7 +44,7 @@ public class LoginAction implements Action{
                     .build();
 
             userSession.setUserProfile(updatedUserProfile);
-            gameView.startGame(updatedUserProfile);
+            gameView.displayGame(updatedUserProfile);
 
         }
         catch (AuthenticationException e) {

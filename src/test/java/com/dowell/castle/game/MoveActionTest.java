@@ -9,8 +9,8 @@ import com.dowell.castle.WordMapImpl;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class MoveActionTest {
@@ -20,7 +20,7 @@ public class MoveActionTest {
         // initialize variable inputs
 
         WordMap currentWordMap = new WordMapImpl.Builder()
-                .characterLocation(new Position(5,5))
+                .characterLocation(new Position(5, 5))
                 .build();
 
         Character character = new Character.Builder()
@@ -31,7 +31,16 @@ public class MoveActionTest {
                 .characters(asList(character))
                 .build();
 
-        UserProfile expectedUserProfile = new UserProfile.Builder(userProfile).build();
+        WordMap expectedCurrentWordMap = new WordMapImpl.Builder()
+                .characterLocation(new Position(4, 5))
+                .build();
+        Character expectedCharacter = new Character.Builder()
+                .name("doom")
+                .currentWordMap(expectedCurrentWordMap)
+                .build();
+        UserProfile expectedUserProfile = new UserProfile.Builder()
+                .characters(asList(expectedCharacter))
+                .build();
 
         // initialize mocks
         GameView view = mock(GameView.class);
@@ -41,15 +50,16 @@ public class MoveActionTest {
         when(userSession.getProfile()).thenReturn(userProfile);
 
         // initialize class to test
-        MoveAction testClass = new MoveAction(userSession,view);
+        MoveAction testClass = new MoveAction(userSession, view);
 
         // invoke method on class to test
         testClass.doAction();
 
         // assert return value
-        fail("Not completed");
 
         // verify mock expectations
-//        view.requestUserMoveAction()
+        verify(view).displayGame(expectedUserProfile);
+        verify(userSession).setUserProfile(expectedUserProfile);
+
     }
 }

@@ -64,7 +64,7 @@ public class LoginActionTest {
 
         // verify mock expectations
         verify(userSession).setUserProfile(updatedUserProfile);
-        verify(gameView).startGame(updatedUserProfile);
+        verify(gameView).displayGame(updatedUserProfile);
 
     }
 

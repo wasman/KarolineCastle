@@ -10,7 +10,7 @@ public class GameViewImpl implements GameView {
     private Action moveAction;
 
     @Override
-    public void startGame(UserProfile userProfile) {
+    public void displayGame(UserProfile userProfile) {
         System.out.println("Paling as : " + userProfile.getCharacters().get(0));
         WordMap currentWordMap = userProfile.getCharacters().get(0).getCurrentWordMap();
         ConsoleUtil.displayWord(currentWordMap);

@@ -1,7 +1,10 @@
 package com.dowell.castle;
 
+import com.dowell.castle.game.GamePresenter;
+import com.dowell.castle.game.GamePresenterImpl;
 import com.dowell.castle.game.GameView;
 import com.dowell.castle.game.GameViewImpl;
+import com.dowell.castle.login.CastlePresenter;
 import com.dowell.castle.login.CastlePresenterImpl;
 import com.dowell.castle.login.CastleView;
 import com.dowell.castle.login.CastleViewImpl;
@@ -31,7 +34,8 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
         LoginView loginView = new LoginViewImpl();
         CastleView castleView = new CastleViewImpl();
         GameView gameView = new GameViewImpl();
-        CastlePresenterImpl castlePresenter = new CastlePresenterImpl(castleView, loginView, registrationView, profileService, gameWordService, userSession, gameView);
+        CastlePresenter castlePresenter = new CastlePresenterImpl(castleView, loginView, registrationView, profileService, gameWordService, userSession, gameView);
+        GamePresenter gamePresenter = new GamePresenterImpl(gameView, userSession);
 
         castlePresenter.init();
 
