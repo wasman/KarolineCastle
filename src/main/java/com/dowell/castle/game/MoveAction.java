@@ -33,6 +33,15 @@ public class MoveAction implements Action {
             case "1":
                 newCharacterLocation = new Position(characterLocation.getXaix() - 1, characterLocation.getYaix());
                 break;
+            case "2":
+                newCharacterLocation = new Position(characterLocation.getXaix(), characterLocation.getYaix() - 1);
+                break;
+            case "3":
+            newCharacterLocation = new Position(characterLocation.getXaix(), characterLocation.getYaix() + 1);
+            break;
+            case "4":
+                newCharacterLocation = new Position(characterLocation.getXaix() + 1, characterLocation.getYaix());
+                break;
             default:
                 newCharacterLocation = characterLocation;
                 break;
