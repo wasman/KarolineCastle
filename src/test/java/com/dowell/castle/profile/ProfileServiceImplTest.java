@@ -1,5 +1,6 @@
 package com.dowell.castle.profile;
 
+import com.dowell.castle.Character;
 import com.dowell.castle.GameWordService;
 import com.dowell.castle.GameWordServiceImpl;
 import com.dowell.castle.UserProfile;
@@ -7,6 +8,7 @@ import com.dowell.castle.repository.ProfileRepository;
 import com.dowell.castle.repository.ProfileRepositoryImpl;
 import org.junit.Test;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
@@ -51,7 +53,6 @@ public class ProfileServiceImplTest {
         String userName = "Jack";
         String password = "thePassword";
         String securePassword = "$thePassword$";
-
 
         // initialize mocks
         SecurityHelper helper = mock(SecurityHelperImpl.class);
@@ -150,13 +151,18 @@ public class ProfileServiceImplTest {
         String password = "thePassword";
         String securePassword = "$thePassword$";
 
+        Character character = new Character.Builder()
+                .name("doom")
+                .build();
         UserProfile inputValue = new UserProfile.Builder()
                 .userName(userName)
                 .password(password)
+                .characters(asList(character))
                 .build();
 
         UserProfile expectedValue = new UserProfile.Builder()
                 .userName(userName)
+                .characters(asList(character))
                 .password(securePassword)
                 .build();
 
