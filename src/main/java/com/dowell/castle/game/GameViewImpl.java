@@ -1,6 +1,7 @@
 package com.dowell.castle.game;
 
 import com.dowell.castle.Action;
+import com.dowell.castle.Character;
 import com.dowell.castle.ConsoleUtil;
 import com.dowell.castle.UserProfile;
 import com.dowell.castle.WordMap;
@@ -11,8 +12,10 @@ public class GameViewImpl implements GameView {
 
     @Override
     public void displayGame(UserProfile userProfile) {
-        System.out.println("Paling as : " + userProfile.getCharacters().get(0));
-        WordMap currentWordMap = userProfile.getCharacters().get(0).getCurrentWordMap();
+        System.out.println("Profile status : " + userProfile.getCharacters().get(0));
+        Character character = userProfile.getCharacters().get(0);
+        System.out.println("Playing as : " + character.getName() + " experience : " +character.getExperience());
+        WordMap currentWordMap = userProfile.getCharacters().get(0).getCurrentWord();
         ConsoleUtil.displayWord(currentWordMap);
         moveAction.doAction();
 

@@ -6,16 +6,18 @@ public class GamePresenterImpl implements GamePresenter {
 
     private final GameView gameView;
     private final UserSession userSession;
+    private final GameHelper gameHelper;
 
-    public GamePresenterImpl(GameView gameView, UserSession userSession) {
+    public GamePresenterImpl(GameView gameView, UserSession userSession, GameHelper gameHelper) {
 
         this.gameView = gameView;
         this.userSession = userSession;
+        this.gameHelper = gameHelper;
         wireActions();
     }
 
     private void wireActions() {
-        gameView.wireMoveAction(new MoveAction(userSession, gameView));
+        gameView.wireMoveAction(new MoveAction(userSession, gameView, gameHelper));
 
     }
 

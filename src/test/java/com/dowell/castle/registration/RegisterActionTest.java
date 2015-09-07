@@ -31,7 +31,8 @@ public class RegisterActionTest {
         Character character = new Character.Builder()
                 .name(characterName)
                 .characterType(characterType)
-                .currentWordMap(wordMap)
+                .currentWord(wordMap)
+                .experience(0)
                 .build();
 
         UserProfile profile = new UserProfile.Builder()

@@ -37,4 +37,10 @@ public class ProfileServiceImpl implements ProfileService {
         repository.create(newUserProfile);
         return newUserProfile;
     }
+
+    @Override
+    public void save(UserProfile profile) {
+
+        repository.save(profile);
+    }
 }

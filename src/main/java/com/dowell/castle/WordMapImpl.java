@@ -104,6 +104,10 @@ public class WordMapImpl implements WordMap {
             return this;
         }
 
+        public Builder wordMap(Map<Position, ActionCell> wordMap) {
+            this.wordMap = wordMap;
+            return this;
+        }
         public Builder characterLocation(Position characterLocation) {
             this.characterLocation = characterLocation;
             return this;

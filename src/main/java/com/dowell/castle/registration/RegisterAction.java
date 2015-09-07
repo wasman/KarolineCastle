@@ -37,7 +37,8 @@ public class RegisterAction implements Action {
 
         Character character = new Character.Builder()
                 .name(characterName)
-                .currentWordMap(startGame)
+                .currentWord(startGame)
+                .experience(0)
                 .characterType(characterType)
                 .build();
 

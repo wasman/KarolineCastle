@@ -14,11 +14,13 @@ public class MoveAction implements Action {
 
     private final UserSession userSession;
     private final GameView gameView;
+    private final GameHelper gameHelper;
 
-    public MoveAction(UserSession userSession, GameView gameView) {
+    public MoveAction(UserSession userSession, GameView gameView, GameHelper gameHelper) {
 
         this.userSession = userSession;
         this.gameView = gameView;
+        this.gameHelper = gameHelper;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class MoveAction implements Action {
         String moveAction = gameView.requestUserMoveAction();
         UserProfile profile = userSession.getProfile();
         Character character = profile.getCharacters().get(0);
-        WordMap currentWordMap = character.getCurrentWordMap();
+        WordMap currentWordMap = character.getCurrentWord();
         Position characterLocation = currentWordMap.getCharacterLocation();
         Position newCharacterLocation;
         switch (moveAction) {
@@ -37,8 +39,8 @@ public class MoveAction implements Action {
                 newCharacterLocation = new Position(characterLocation.getXaix(), characterLocation.getYaix() - 1);
                 break;
             case "3":
-            newCharacterLocation = new Position(characterLocation.getXaix(), characterLocation.getYaix() + 1);
-            break;
+                newCharacterLocation = new Position(characterLocation.getXaix(), characterLocation.getYaix() + 1);
+                break;
             case "4":
                 newCharacterLocation = new Position(characterLocation.getXaix() + 1, characterLocation.getYaix());
                 break;
@@ -47,12 +49,16 @@ public class MoveAction implements Action {
                 break;
         }
 
+        Character updatedCharacter = new Character.Builder(character)
+                .currentWord(new WordMapImpl.Builder(currentWordMap)
+                        .characterLocation(newCharacterLocation)
+                        .build())
+                .build();
+
+        Character newCharacter = gameHelper.processActionCell(updatedCharacter);
+
         UserProfile newProfile = new UserProfile.Builder(profile)
-                .characters(asList(new Character.Builder(character)
-                        .currentWordMap(new WordMapImpl.Builder(currentWordMap)
-                                .characterLocation(newCharacterLocation)
-                                .build())
-                        .build()))
+                .characters(asList(newCharacter))
                 .build();
         userSession.setUserProfile(newProfile);
         gameView.displayGame(newProfile);

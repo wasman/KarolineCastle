@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Map;
 
 public class Main {
@@ -45,6 +44,8 @@ public class Main {
 
         graphics.drawRect(0, 0, width - 1, height - 1);
 
+        graphics.drawArc(40,10,40,10,0,90);
+
         for (Map.Entry<Position, ActionCell> entry : wordMap.entrySet()) {
             int xaix = entry.getKey().getXaix();
             int yaix = entry.getKey().getYaix();
@@ -52,19 +53,19 @@ public class Main {
             graphics.drawRect(xaix * 4, yaix * 3, 3, 2);
         }
 
-        try {
-            String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            }
-            else {
-
-                Runtime.getRuntime().exec("clear");
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String os = System.getProperty("os.name");
+//            if (os.contains("Windows")) {
+//                Runtime.getRuntime().exec("cls");
+//            }
+//            else {
+//
+//                Runtime.getRuntime().exec("clear");
+//            }
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         System.out.println("Game on: " +world.getName());
         for (int y = 0; y < height; y++) {

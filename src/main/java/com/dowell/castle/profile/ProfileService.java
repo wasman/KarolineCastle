@@ -7,4 +7,6 @@ public interface ProfileService {
     UserProfile getUserProfile(String userName, String password) throws AuthenticationException;
 
     UserProfile createUserProfile(UserProfile userProfile);
+
+    void save(UserProfile profile);
 }

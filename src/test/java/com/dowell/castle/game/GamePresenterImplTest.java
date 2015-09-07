@@ -19,7 +19,7 @@ public class GamePresenterImplTest {
         UserSession userSession = mock(UserSession.class);
 
         // initialize class to test
-        GamePresenter testClass = new GamePresenterImpl(gameView, userSession);
+        GamePresenter testClass = new GamePresenterImpl(gameView, userSession, null);
 
         // invoke method on class to test
 

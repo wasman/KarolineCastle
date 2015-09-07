@@ -185,4 +185,39 @@ public class ProfileServiceImplTest {
         // verify mock expectations
         verify(repository).create(expectedValue);
     }
+
+    @Test
+    public void testSaveUserProfile() throws Exception {
+        // initialize variable inputs
+        String userName = "Jack";
+        String password = "thePassword";
+        String securePassword = "$thePassword$";
+
+        Character character = new Character.Builder()
+                .name("doom")
+                .build();
+        UserProfile inputValue = new UserProfile.Builder()
+                .userName(userName)
+                .password(password)
+                .characters(asList(character))
+                .build();
+
+        // initialize mocks
+        SecurityHelper helper = mock(SecurityHelperImpl.class);
+        ProfileRepository repository = mock(ProfileRepositoryImpl.class);
+        GameWordService gameWordService = mock(GameWordServiceImpl.class);
+
+        when(helper.getSecurePassword(password)).thenReturn(securePassword);
+
+        // initialize class to test
+        ProfileService testClass = new ProfileServiceImpl(helper, repository, gameWordService);
+
+        // invoke method on class to test
+        testClass.save(inputValue);
+
+        // assert return value
+
+        // verify mock expectations
+        verify(repository).save(inputValue);
+    }
 }
